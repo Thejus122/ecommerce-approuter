@@ -2,13 +2,13 @@ export default function About() {
   return (
     <div className="about-container">
 
-      {/* HERO */}
+     
       <div className="about-hero">
         <h1>About MyShop</h1>
         <p>Your trusted online shopping partner</p>
       </div>
 
-      {/* INTRO */}
+      
       <section className="about-section">
         <h2>Who We Are</h2>
         <p>
@@ -18,7 +18,7 @@ export default function About() {
         </p>
       </section>
 
-      {/* MISSION & VISION */}
+ 
       <section className="about-grid">
         <div className="about-card">
           <h3>Our Mission</h3>
@@ -37,7 +37,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
+      
       <section className="about-section">
         <h2>Why Choose Us?</h2>
         <ul className="about-list">

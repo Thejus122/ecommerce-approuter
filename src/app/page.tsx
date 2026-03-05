@@ -15,7 +15,7 @@ export default async function Home() {
 
       
 
-      {/* HERO SECTION */}
+      
       <div className="hero">
         <div className="hero-content">
           
@@ -27,7 +27,7 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* TRENDING PRODUCTS */}
+      
       <h2 className="section-title">Trending Products</h2>
       <div className="products-grid">
         {products.map((product: any) => (

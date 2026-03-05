@@ -1,34 +1,27 @@
 export default async function ProductDetail({ params }) {
-  try {
-    const res = await fetch(
-      `https://fakestoreapi.com/products/${params.id}`,
-      { cache: "no-store" }
-    );
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch product");
-    }
+  const { id } = await params;
 
-    const product = await res.json();
+  const res = await fetch(
+    `https://fakestoreapi.com/products/${id}`,
+    { cache: "no-store" }
+  );
 
-    return (
-      <div style={{ padding: "40px" }}>
-        <div style={{ display: "flex", gap: "40px" }}>
-          <img
-            src={product.image}
-            alt={product.title}
-            style={{ width: "300px", objectFit: "contain" }}
-          />
+  const product = await res.json();
 
-          <div>
-            <h1>{product.title}</h1>
-            <h2>${product.price}</h2>
-            <p>{product.description}</p>
-          </div>
-        </div>
-      </div>
-    );
-  } catch (error) {
-    return <h1>Product not found ❌</h1>;
-  }
+  return (
+    <div style={{ padding: "40px" }}>
+      <h1>{product.title}</h1>
+
+      <img
+        src={product.image}
+        alt={product.title}
+        style={{ width: "200px" }}
+      />
+
+      <p>{product.description}</p>
+
+      <h3>${product.price}</h3>
+    </div>
+  );
 }
