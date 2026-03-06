@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 async function getProducts() {
-  const res = await fetch("https://fakestoreapi.com/products", {
+  const res = await fetch("https://dummyjson.com/products", {
     cache: "no-store",
   });
 
@@ -10,7 +10,8 @@ async function getProducts() {
     throw new Error("Failed to fetch products");
   }
 
-  return res.json();
+  const data = await res.json();
+  return data.products; // DummyJSON returns { products: [] }
 }
 
 export default async function Home() {
@@ -35,7 +36,7 @@ export default async function Home() {
         {products.map((product: any) => (
           <div key={product.id} className="product-card">
             <Image
-              src={product.image}
+              src={product.thumbnail}
               alt={product.title}
               width={200}
               height={200}
