@@ -14,7 +14,7 @@ export default async function ProductDetail({ params }) {
   const product = await res.json();
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div style={{ padding: "40px" }}>z
       <h1>{product.title}</h1>
 
       <img

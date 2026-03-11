@@ -1,25 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useCart } from "../context/CartContext";
+import { useCart } from "@/context/CartContext";
+import styles from "./navbar.module.css";
 
 export default function Navbar() {
-
   const { cart } = useCart();
 
+  const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+
   return (
-    <nav className="navbar">
+    <nav className={styles.navbar}>
+      <div className={styles.logo}>MyStore</div>
 
-      <h2 className="logo">MyShop</h2>
+      <div className={styles.links}>
+        <Link className={styles.link} href="/">Home</Link>
+        <Link className={styles.link} href="/products">Products</Link>
+        <Link className={styles.link} href="/about">About</Link>
+        <Link className={styles.link} href="/contact">Contact</Link>
 
-      <div className="nav-links">
-        <Link href="/">Home</Link>
-        <Link href="/products">Products</Link>
-        <Link href="/about">About</Link>
-        <Link href="/contact">Contact</Link>
-        <Link href="/cart">Cart ({cart.length})</Link>
+        <Link className={`${styles.link} ${styles.cart}`} href="/cart">
+          🛒 Cart
+          {totalItems > 0 && (
+            <span className={styles.badge}>{totalItems}</span>
+          )}
+        </Link>
       </div>
-
     </nav>
   );
 }

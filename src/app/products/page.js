@@ -2,57 +2,45 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "@/context/CartContext";
+import styles from "./products.module.css";
 
-export default function Page() {
+export default function Products() {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await fetch("https://dummyjson.com/products");
-        const data = await res.json();
-
-        setProducts(data.products); // important
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      }
-    }
-
-    fetchProducts();
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data.products));
   }, []);
 
   return (
-    <div className="products-container">
+    <div style={{ padding: "30px" }}>
       <h1>Products</h1>
 
-      <div className="product-grid">
+      <div className={styles.grid}>
         {products.map((product) => (
-          <div key={product.id} className="product-card">
+          <div key={product.id} className={styles.card}>
+            
+            <Link href={`/products/${product.id}`}>
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                className={styles.image}
+              />
+            </Link>
 
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="product-image"
-            />
+            <h3 className={styles.title}>{product.title}</h3>
 
-            <h4>{product.title}</h4>
+            <p className={styles.price}>₹ {product.price}</p>
 
-            <p>${product.price}</p>
-
-            <div className="card-buttons">
-              <Link href={`/products/${product.id}`}>
-                <button className="view-btn">View</button>
-              </Link>
-
-              <button
-                className="cart-btn"
-                onClick={() => addToCart(product)}
-              >
-                Add to Cart
-              </button>
-            </div>
+            <button
+              className={styles.btn}
+              onClick={() => addToCart(product)}
+            >
+              Add to Cart
+            </button>
 
           </div>
         ))}
