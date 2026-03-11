@@ -11,7 +11,7 @@ export default function CartPage() {
 
       {cart.length === 0 && <p>Your cart is empty</p>}
 
-      {cart.map((item) => (
+      {cart.map((item: any) => (
         <div
           key={item.id}
           style={{
@@ -24,11 +24,7 @@ export default function CartPage() {
             borderRadius: "8px"
           }}
         >
-          <img
-            src={item.thumbnail}
-            alt={item.title}
-            width="80"
-          />
+          <img src={item.thumbnail} alt={item.title} width="80" />
 
           <div style={{ flex: 1 }}>
             <h3>{item.title}</h3>
@@ -42,21 +38,20 @@ export default function CartPage() {
 
             <button onClick={() => increaseQty(item.id)}>+</button>
           </div>
-          <button
-  onClick={() => removeItem(item.id)}
-  style={{
-    background: "red",
-    color: "white",
-    border: "none",
-    padding: "8px 12px",
-    borderRadius: "5px",
-    cursor: "pointer"
-  }}
->
-  Cancel
-</button>
 
-          
+          <button
+            onClick={() => removeItem(item.id)}
+            style={{
+              background: "red",
+              color: "white",
+              border: "none",
+              padding: "8px 12px",
+              borderRadius: "5px",
+              cursor: "pointer"
+            }}
+          >
+            Cancel
+          </button>
         </div>
       ))}
     </div>
